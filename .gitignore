@@ -108,9 +108,15 @@ celerybeat.pid
 # Environments
 .env
 .venv
+<<<<<<< HEAD
 .env/
 venv/
 .env/
+=======
+env/
+venv/
+ENV/
+>>>>>>> origin/main
 env.bak/
 venv.bak/
 env.example

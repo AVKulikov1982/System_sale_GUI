@@ -5,7 +5,12 @@ from email.header import decode_header
 from imap_tools import MailBox
 
 
-def get_email_imap_tools():
+def get_email_imap_tools() -> None:
+	"""
+	Функция для поиска в почтовом ящике писем с файлами в формате .pdf с почтового ящика бухгалтерии.
+	:return: None
+	"""
+
 	with MailBox('imap.yandex.ru').login('test.system.sale@yandex.ru', 'pnmikqsnhpmcdreb',
 										 'INBOX') as mailbox:
 		for msg in mailbox.fetch():
@@ -34,7 +39,13 @@ def get_email_imap_tools():
 			print(msg_text)
 
 
-def get_email_payments():
+def get_email_payments() -> None:
+	"""
+	Функция для поиска в почтовом ящике писем с файлами в формате .pdf с почтового ящика бухгалтерии.
+	Сохраняет файл в случае успеха в заданной директории.
+	:return: None
+	"""
+
 	imap = imaplib.IMAP4_SSL("imap.mail.ru")
 	imap.login('test_system_sale@mail.ru', 'H5dYFa6g4Qp3CTmN1Mrv')
 	imap.select("inbox")

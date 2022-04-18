@@ -1,8 +1,14 @@
 import os
 import fitz
+from typing import Optional
 
 
-def get_payments():
+def get_payments() -> Optional[list[tuple[str, str, str]]]:
+	"""
+	Функция, которая разбирает файл .pdf - ведомость на сделки.
+	:return: Возвращает список кортежей ('номер ПП', 'наименование плательщика', 'сумма платежа')
+	"""
+
 	try:
 		list_pdf_document = []
 		list_payments = []

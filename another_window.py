@@ -1,5 +1,5 @@
 import datetime
-# import pandas as pd
+import xlwt
 from tkinter import *
 from tkinter.ttk import Combobox
 from tkinter import messagebox
@@ -98,14 +98,26 @@ class ShowResult(StartWindow):
 																							 **self.params)
 
 	def export_to_excel(self):
-		dict_month = {'01': 'январь', '02': 'февраль', '03': 'март', '04': 'апрель', '05': 'май', '06': 'июнь',
-					  '07': 'июль', '08': 'август', '09': 'сентябрь', '10': 'октябрь', '11': 'ноябрь',
-					  '12': 'декабрь', }
 		month = str(datetime.date.today()).split('-')[1]
 		year = str(datetime.date.today()).split('-')[0]
-		file_name = 'Ведомость_' + month + '_' + year + '.xlsx'
-		# df = pd.DataFrame(self.list_for_export)
-		# df.to_excel(file_name, dict_month[month], header=self.list_headers, index=False)
+		file_name = 'Ведомость_' + month + '_' + year + '.xls'
+		book = xlwt.Workbook(encoding="utf-8")
+		sheet1 = book.add_sheet(month + '_' + year)
+
+		cols = self.list_headers
+		txt = self.list_for_export
+		print(self.list_headers)
+		print()
+		print(self.list_for_export)
+		row = sheet1.row(0)
+		for column in range(8):
+			row.write(column, cols[column])
+		for index, sale in enumerate(txt):
+			for column in range(len(sale)):
+				row = sheet1.row(index + 1)
+				row.write(column, sale[column])
+
+		book.save(file_name)
 
 	def go_to_start(self):
 		self.root.destroy()

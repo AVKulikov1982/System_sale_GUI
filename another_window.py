@@ -103,20 +103,13 @@ class ShowResult(StartWindow):
 		file_name = 'Ведомость_' + month + '_' + year + '.xls'
 		book = xlwt.Workbook(encoding="utf-8")
 		sheet1 = book.add_sheet(month + '_' + year)
-
-		cols = self.list_headers
-		txt = self.list_for_export
-		print(self.list_headers)
-		print()
-		print(self.list_for_export)
 		row = sheet1.row(0)
 		for column in range(8):
-			row.write(column, cols[column])
-		for index, sale in enumerate(txt):
+			row.write(column, self.list_headers[column])
+		for index, sale in enumerate(self.list_for_export):
 			for column in range(len(sale)):
 				row = sheet1.row(index + 1)
 				row.write(column, sale[column])
-
 		book.save(file_name)
 
 	def go_to_start(self):
